@@ -1,0 +1,10 @@
+# Ignore temporary swap files
+.DS_Store
+*.sb-*
+/tmp/
+raw_source/
+
+# Ignore heavy raw local video masters (>100MB)
+# Web-optimized cuts (*-web.mp4) and previews (*-preview.mp4) are included
+assets/videos/*-full.mp4
+assets/videos/price-of-comfort-web.mp4.sb-*

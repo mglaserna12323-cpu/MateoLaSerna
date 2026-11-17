@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mateo La Serna | Filmmaker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Editorial Serif Fonts (Times New Roman style) & Space Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Times New Roman"', 'Times', 'Newsreader', 'Baskerville', 'Georgia', 'serif'],
+            serif: ['"Times New Roman"', 'Times', 'Newsreader', 'Baskerville', 'Georgia', 'serif'],
+            brand: ['"Times New Roman"', 'Times', 'Newsreader', 'Baskerville', 'Georgia', 'serif'],
+            mono: ['Space Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #070707; color: #f4f4f5; font-family: "Times New Roman", Times, Newsreader, Baskerville, Georgia, serif; }
+    .view-section { display: none; opacity: 0; }
+    .view-section.active { display: block; animation: cinematicFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    @keyframes cinematicFade {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #070707; }
+    ::-webkit-scrollbar-thumb { background: #262626; border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: #404040; }
+  </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black overflow-x-hidden min-h-screen bg-[#070707]">
+
+  <!-- TOP PERSISTENT NAV -->
+  <header id="top-nav" class="hidden fixed top-0 left-0 w-full z-50 bg-[#070707]/90 backdrop-blur-md border-b border-zinc-900/80 transition-all duration-300">
+    <div class="max-w-[1600px] mx-auto px-6 py-4 flex justify-between items-center">
+      <button onclick="switchView('home')" class="text-left group cursor-pointer focus:outline-none">
+        <span class="font-brand text-sm md:text-base tracking-[0.2em] font-medium uppercase text-white block group-hover:text-zinc-300 transition">MATEO LA SERNA</span>
+        <span class="text-[10px] tracking-[0.3em] uppercase text-zinc-400 block font-light">Filmmaker</span>
+      </button>
+      <nav class="flex items-center space-x-6 md:space-x-10 text-xs uppercase tracking-[0.18em] text-zinc-400 font-medium">
+        <button onclick="switchView('portfolio')" id="nav-portfolio" class="hover:text-white transition cursor-pointer">Portfolio</button>
+        <button onclick="switchView('portfolio', true)" id="nav-screenplays" class="hover:text-white transition cursor-pointer">Screenplays</button>
+        <button onclick="switchView('about')" id="nav-about" class="hover:text-white transition cursor-pointer">About</button>
+        <button onclick="switchView('contact')" id="nav-contact" class="hover:text-white transition cursor-pointer">Contact</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       1. HOME LANDING VIEW
+       ========================================== -->
+  <main id="view-home" class="view-section active relative w-full h-screen overflow-hidden">
+    <div id="hero-backdrop" class="absolute inset-0 bg-cover bg-center scale-105 transition-transform duration-1000 ease-out" 
+         style="background-image: url('assets/hero-bg.png'), url('assets/hero-bg.jpg'), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=85');">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-[#070707]/95"></div>
+    </div>
+
+    <!-- Center Brand Logo & Navigation -->
+    <div class="relative z-10 h-full flex flex-col justify-between p-8 md:p-16 max-w-[1600px] mx-auto">
+      
+      <div class="flex-1 flex flex-col items-center justify-center text-center mt-4">
+        <div class="relative flex flex-col items-center justify-center">
+          <img id="brand-logo" src="assets/logo.png" 
+               onerror="this.onerror=null; this.src='assets/logo.svg'; document.getElementById('brand-text-block').classList.remove('hidden');"
+               onload="document.getElementById('brand-text-block').classList.add('hidden');"
+               alt="Mateo La Serna Emblem" 
+               class="w-64 md:w-80 h-auto mb-2 drop-shadow-2xl" />
+          
+          <div id="fallback-emblem" class="hidden w-24 h-24 mb-5 rounded-full border-2 border-white/80 items-center justify-center">
+            <span class="font-mono text-xs tracking-widest uppercase">MLS</span>
+          </div>
+
+          <div id="brand-text-block" class="hidden">
+            <h1 class="font-brand text-3xl md:text-5xl font-bold tracking-[0.18em] uppercase text-white drop-shadow-md">
+              MATEO LA SERNA
+            </h1>
+            <p class="font-brand text-sm md:text-lg tracking-[0.28em] uppercase text-zinc-200 mt-2">
+              FILMMAKER
+            </p>
+            <p class="font-brand text-xs tracking-[0.25em] uppercase text-zinc-400 mt-1">
+              EST. 2026
+            </p>
+          </div>
+        </div>
+
+        <!-- Center Navigation Links -->
+        <div class="flex flex-wrap items-center justify-center gap-6 md:gap-10 mt-8 text-xs md:text-sm tracking-[0.2em] uppercase font-light text-white/90">
+          <button onclick="switchView('portfolio')" class="hover:text-white hover:underline underline-offset-8 transition cursor-pointer">Portfolio</button>
+          <button onclick="switchView('portfolio', true)" class="hover:text-white hover:underline underline-offset-8 transition cursor-pointer">Screenplays</button>
+          <button onclick="switchView('about')" class="hover:text-white hover:underline underline-offset-8 transition cursor-pointer">About</button>
+          <button onclick="switchView('contact')" class="hover:text-white hover:underline underline-offset-8 transition cursor-pointer">Contact</button>
+        </div>
+      </div>
+
+      <!-- Bottom Bar: View Portfolio Button (Left) & Headline (Right) -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pb-4">
+        <button onclick="switchView('portfolio')" 
+                class="border border-white/80 text-white px-9 py-4 text-xs font-mono uppercase tracking-[0.22em] hover:bg-white hover:text-black transition duration-300 cursor-pointer">
+          View Portfolio
+        </button>
+
+        <div class="md:text-left max-w-md">
+          <h2 class="text-3xl md:text-5xl font-light tracking-tight text-white mb-2 font-brand">
+            Film &amp; Television
+          </h2>
+          <p class="text-xs md:text-sm text-zinc-300 leading-relaxed font-light">
+            A portfolio of filmmaking, cinematography, and visual work
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==========================================
+       2. PORTFOLIO & SCREENPLAYS VIEW
+       ========================================== -->
+  <section id="view-portfolio" class="view-section min-h-screen pt-24 pb-24 px-4 md:px-8 max-w-[1600px] mx-auto">
+    
+    <!-- Top Header Bar: SELECTED PROJECTS ]  |  Category Filter  |  GRID / LIST -->
+    <div class="flex flex-wrap justify-between items-center gap-4 mb-6 pb-3 border-b border-zinc-900 font-mono text-xs tracking-widest uppercase">
+      <div class="flex items-center space-x-6">
+        <span class="text-zinc-200 font-semibold">SELECTED PROJECTS ]</span>
+        <div class="hidden sm:flex space-x-4 text-zinc-500">
+          <button onclick="filterProjects('ALL')" class="cat-btn text-white transition cursor-pointer" data-cat="ALL">ALL</button>
+          <button onclick="filterProjects('DOCUMENTARY')" class="cat-btn hover:text-white transition cursor-pointer" data-cat="DOCUMENTARY">DOCUMENTARY</button>
+          <button onclick="filterProjects('NARRATIVE')" class="cat-btn hover:text-white transition cursor-pointer" data-cat="NARRATIVE">NARRATIVE &amp; ESSAY</button>
+          <button onclick="filterProjects('COMMERCIAL')" class="cat-btn hover:text-white transition cursor-pointer" data-cat="COMMERCIAL">COMMERCIAL &amp; DANCE</button>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-2 text-zinc-400">
+        <button id="btn-grid" onclick="setLayout('grid')" class="underline text-white cursor-pointer">GRID</button>
+        <span>/</span>
+        <button id="btn-list" onclick="setLayout('list')" class="hover:text-white cursor-pointer">LIST</button>
+      </div>
+    </div>
+
+    <!-- Category filters for mobile screens -->
+    <div class="sm:hidden flex flex-wrap gap-2 mb-4 font-mono text-[10px] tracking-wider uppercase text-zinc-400">
+      <button onclick="filterProjects('ALL')" class="cat-btn text-white px-2 py-1 bg-zinc-900 border border-zinc-800" data-cat="ALL">ALL</button>
+      <button onclick="filterProjects('DOCUMENTARY')" class="cat-btn px-2 py-1 bg-zinc-900 border border-zinc-800" data-cat="DOCUMENTARY">DOCS</button>
+      <button onclick="filterProjects('NARRATIVE')" class="cat-btn px-2 py-1 bg-zinc-900 border border-zinc-800" data-cat="NARRATIVE">NARRATIVE</button>
+      <button onclick="filterProjects('COMMERCIAL')" class="cat-btn px-2 py-1 bg-zinc-900 border border-zinc-800" data-cat="COMMERCIAL">COMMERCIAL</button>
+    </div>
+
+    <!-- Cinema Projects Container -->
+    <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+      <!-- Populated automatically from PROJECTS array below -->
+    </div>
+
+    <!-- WRITTEN WORK & SCREENPLAYS SECTION -->
+    <div id="screenplays-section" class="mt-28 pt-12 border-t border-zinc-900">
+      <div class="flex flex-wrap justify-between items-baseline gap-2 mb-8 font-mono text-xs tracking-widest uppercase">
+        <span class="text-zinc-200 font-semibold">WRITTEN WORK &amp; SCREENPLAYS ]</span>
+        <span class="text-zinc-500">ORIGINAL SCRIPTS &amp; TREATMENTS</span>
+      </div>
+
+      <div id="screenplays-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Populated automatically from SCREENPLAYS array below -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       3. ABOUT VIEW: MATEO FIRST + SCROLLABLE STILLS ARCHIVE
+       ========================================== -->
+  <section id="view-about" class="view-section min-h-screen pt-24 pb-28 px-4 md:px-8 max-w-[1600px] mx-auto">
+    
+    <!-- PART 1: MATEO FIRST (Bio, Camera Portrait, Hollywood PA, Resume) -->
+    <div class="max-w-5xl mx-auto mb-24 pt-4">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start">
+        
+        <!-- Left Column: Landscape Portrait (16:9 1920x1080 Expanded) -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-start">
+          <div class="w-full max-w-[440px] md:max-w-[480px] aspect-[16/9] bg-zinc-950 overflow-hidden border border-zinc-800 shadow-2xl relative rounded-sm">
+            <img src="assets/mateo-headshot.jpg?v=1080p_widescreen" 
+                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1000&q=80';" 
+                 alt="Mateo La Serna" 
+                 class="w-full h-full object-cover" />
+          </div>
+        </div>
+
+        <!-- Right Column: Bio, PA Experience Summary & Resume Link -->
+        <div class="lg:col-span-7 space-y-6">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-widest text-zinc-500 mb-2">ABOUT ]</p>
+            <h2 class="text-4xl md:text-5xl font-light tracking-tight text-white font-brand">Mateo La Serna</h2>
+            <p class="text-xs md:text-sm uppercase tracking-[0.2em] text-zinc-400 mt-2 font-mono">
+              Narrative &amp; Documentary Filmmaker • Hollywood Production Assistant
+            </p>
+          </div>
+
+          <div class="space-y-4 text-zinc-300 text-sm md:text-base leading-relaxed font-light">
+            <p>
+              Mateo La Serna is a Peruvian-born filmmaker raised in North Carolina.
+            </p>
+            <p>
+              His work explores identity, culture, and experiences that often go unheard. Through documentary and narrative filmmaking, Mateo creates work that challenges perspectives, preserves cultural memory, and brings audiences closer to worlds beyond their own.
+            </p>
+            <div class="border-l-2 border-zinc-700 pl-5 my-5 py-1 bg-zinc-950/60">
+              <p class="text-sm text-zinc-300 leading-relaxed font-light">
+                Alongside directing, cinematography, and editing across short films and documentary series, Mateo brings hands-on Hollywood set experience as a professional Production Assistant—well-versed in fast-paced set operations, lockups, talent coordination, and high-stakes crew workflows.
+              </p>
+            </div>
+          </div>
+
+          <!-- Resume & Action Buttons -->
+          <div class="pt-2 flex flex-wrap gap-4">
+            <a href="assets/resume.pdf" target="_blank" 
+               class="inline-flex items-center bg-white text-black px-7 py-3.5 text-xs font-mono uppercase tracking-widest hover:bg-zinc-200 transition">
+              View / Download Resume (PDF) →
+            </a>
+            <button onclick="switchView('contact')" 
+                    class="inline-flex items-center border border-zinc-700 text-white px-7 py-3.5 text-xs font-mono uppercase tracking-widest hover:border-white transition cursor-pointer">
+              Contact Mateo
+            </button>
+            <a href="#about-stills-section" 
+               class="inline-flex items-center border border-zinc-800 text-zinc-400 px-6 py-3.5 text-xs font-mono uppercase tracking-widest hover:text-white hover:border-zinc-500 transition">
+              Explore Stills Archive ↓
+            </a>
+          </div>
+
+          <!-- Social Links -->
+          <div class="pt-4 flex items-center space-x-6 text-xs font-mono uppercase tracking-widest text-zinc-400">
+            <a href="https://www.instagram.com/mateo._.ls/" target="_blank" class="hover:text-white underline underline-offset-4 transition">Instagram: @mateo._.ls</a>
+            <a href="https://www.facebook.com/profile.php?id=61573016035446" target="_blank" class="hover:text-white underline underline-offset-4 transition">Facebook</a>
+            <a href="mailto:Mglaserna12323@gmail.com" class="hover:text-white underline underline-offset-4 transition">Email</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PART 2: SCROLLABLE STILLS ARCHIVE -->
+    <div id="about-stills-section" class="pt-12 border-t border-zinc-900">
+      <div class="flex flex-wrap justify-between items-end gap-4 mb-8">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-widest text-zinc-500 mb-1">STILLS &amp; CINEMATOGRAPHY ARCHIVE ]</p>
+          <h3 class="text-2xl md:text-4xl font-light tracking-tight text-white font-brand">Selected Frames</h3>
+        </div>
+        <p class="font-mono text-xs uppercase tracking-widest text-zinc-500">
+          Scroll to explore • Click any still to inspect
+        </p>
+      </div>
+
+      <div id="stills-masonry-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Rendered dynamically from STILLS list below -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       4. CONTACT VIEW
+       ========================================== -->
+  <section id="view-contact" class="view-section min-h-screen pt-32 pb-24 px-6 max-w-3xl mx-auto text-center">
+    <p class="font-mono text-xs uppercase tracking-widest text-zinc-500 mb-3">INQUIRIES &amp; BOOKINGS ]</p>
+    <h2 class="text-4xl md:text-5xl font-light text-white mb-6 font-brand">Get In Touch</h2>
+    <p class="text-zinc-400 mb-10 leading-relaxed max-w-xl mx-auto text-sm md:text-base font-light">
+      Available for documentary production, narrative short films, features, cinematography, and Hollywood Production Assistant roles.
+    </p>
+    <div class="space-y-6">
+      <a href="mailto:Mglaserna12323@gmail.com" class="inline-block text-xl md:text-3xl text-white font-mono underline underline-offset-8 hover:text-zinc-300 transition">
+        Mglaserna12323@gmail.com
+      </a>
+      <p class="text-xs text-zinc-500 font-mono tracking-widest uppercase">Primary Production &amp; Personal Inquiries</p>
+      
+      <div class="pt-4 flex flex-wrap justify-center gap-4 text-xs font-mono uppercase tracking-widest text-zinc-400">
+        <a href="https://www.instagram.com/mateo._.ls/" target="_blank" class="hover:text-white border border-zinc-800 px-4 py-2 hover:border-zinc-500 transition">
+          Instagram: @mateo._.ls
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61573016035446" target="_blank" class="hover:text-white border border-zinc-800 px-4 py-2 hover:border-zinc-500 transition">
+          Facebook Profile
+        </a>
+      </div>
+
+      <div class="pt-6">
+        <a href="assets/resume.pdf" target="_blank" class="font-mono text-xs uppercase tracking-widest text-zinc-400 hover:text-white border border-zinc-800 px-6 py-3 inline-block transition hover:border-zinc-500">
+          Download Full Production Resume (PDF)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FULL VIDEO & STILL LIGHTBOX MODAL
+       ========================================== -->
+  <div id="video-modal" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-10">
+    <div class="relative w-full max-w-5xl" onclick="event.stopPropagation()">
+      <div class="flex justify-between items-center mb-4">
+        <div>
+          <h3 id="modal-title" class="text-lg font-medium text-white font-brand"></h3>
+          <p id="modal-meta" class="text-xs font-mono uppercase tracking-widest text-zinc-400"></p>
+        </div>
+        <button onclick="closeModal()" class="font-mono text-xs uppercase tracking-widest text-zinc-400 hover:text-white border border-zinc-800 px-4 py-2 hover:border-zinc-500 transition cursor-pointer">
+          Close [ESC]
+        </button>
+      </div>
+      <div id="modal-player-box" class="aspect-video w-full bg-black border border-zinc-800 overflow-hidden shadow-2xl flex items-center justify-center"></div>
+      <div id="modal-episodes-bar" class="hidden mt-4 pt-3 border-t border-zinc-900"></div>
+      <p id="modal-desc" class="text-sm text-zinc-300 mt-4 leading-relaxed font-light"></p>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PORTFOLIO DATA & INTERACTIVE SCRIPT
+       ========================================== -->
+  <script>
+    // 1. PROJECTS LIST - Priority Filmmaker Order:
+    // 1. Witness (Feature Documentary - Coming 2027)
+    // 2. Price of Comfort (Director of Photography)
+    // 3. Running Out of Time (Writer / Director)
+    // 4. Nuestra América (Writer / Director)
+    // 5. Collegium for African Diaspora Dance 2024 (Videographer / Editor)
+    // 6, 7, 8. Me Vacuno Porque Ep. 1, 2, 3 (Editor)
+    // 9. Looking at the United States and Cuba (Director / Editor)
+    // 10. Health Equity Tour (Boom Operator)
+    // 11. Inside America's UFO Hunting Industry (Production Assistant)
+    // 12. Cal Basketball (Cinematographer / Editor)
+    const PROJECTS = [
+      {
+        title: "Witness",
+        role: "Director / Cinematographer",
+        year: "Coming 2027",
+        category: "DOCUMENTARY",
+        description: "A direct-cinema feature documentary following renowned Peruvian photojournalist Oscar Medrano as he revisits his definitive photographs of the Shining Path conflict. Tracing everyday life in Lima, scholarship at Duke University, and the historic ground of Ayacucho, the film interrogates visual truth, state violence, and the burden of witnessing.",
+        longDescription: "Directed by Mateo La Serna, Witness follows acclaimed Peruvian photojournalist Oscar Medrano as he reflects on his seminal photographs documenting the internal armed conflict with the Shining Path (Sendero Luminoso). Informed by the Third Cinema movement and observational direct-cinema vérité, the film bridges intimate daily life in Lima, academic inquiry at Duke University (Orin Starn, Miguel La Serna), and the haunted landscapes of Ayacucho—examining the human weight of bearing witness to a nation's history.",
+        poster: "assets/thumbnails/witness.jpg?v=20261117",
+        previewVideo: "",
+        fullVideoFile: "",
+        fullVideoEmbed: "",
+        statusBadge: "COMING 2027"
+      },
+      {
+        title: "Price of Comfort",
+        role: "Director of Photography",
+        year: "2025",
+        category: "DOCUMENTARY",
+        description: "Documentary piece examining modern consumption, labor, and hidden costs.",
+        poster: "assets/thumbnails/price-of-comfort.jpg?v=moviestills_2026",
+        previewVideo: "assets/previews/price-of-comfort-preview.mp4?v=2026",
+        fullVideoFile: "assets/videos/price-of-comfort-web.mp4",
+        fullVideoEmbed: ""
+      },
+      {
+        title: "Running Out of Time",
+        role: "Writer / Director",
+        year: "2026",
+        category: "NARRATIVE",
+        description: "Cinematic narrative thriller following high-stakes psychological tension, urgency, and moral conflict under strict temporal constraints.",
+        poster: "assets/thumbnails/running-out-of-time.jpg?v=moviestills_2026",
+        previewVideo: "assets/previews/running-out-of-time-preview.mp4?v=2026",
+        fullVideoFile: "assets/videos/running-out-of-time-web.mp4",
+        fullVideoEmbed: ""
+      },
+      {
+        title: "Nuestra América",
+        role: "Writer / Director",
+        year: "2024",
+        category: "NARRATIVE",
+        description: "Cinematic video essay exploring identity, migration, borders, and shared American experiences.",
+        poster: "assets/thumbnails/nuestra-america.jpg?v=moviestills_2026",
+        previewVideo: "assets/previews/nuestra-america-preview.mp4?v=2026",
+        fullVideoFile: "assets/videos/nuestra-america-web.mp4",
+        fullVideoEmbed: ""
+      },
+      {
+        title: "Collegium for African Diaspora Dance 2024",
+        role: "Videographer / Editor",
+        year: "2024",
+        category: "COMMERCIAL",
+        description: "Performance documentation and conference highlights at Duke University.",
+        poster: "assets/thumbnails/dance-conference.jpg?v=moviestills_2026",
+        previewVideo: "assets/previews/dance-conference-preview.mp4?v=2026",
+        fullVideoFile: "",
+        fullVideoEmbed: "https://player.vimeo.com/video/945864451?autoplay=1"
+      },
+      {
+        title: "Me Vacuno Porque...",
+        role: "Editor",
+        year: "2024",
+        category: "DOCUMENTARY",
+        description: "An educational 3-part documentary series exploring community care, public health advocacy, and personal motivations through intimate testimonial filmmaking.",
+        poster: "assets/thumbnails/me-vacuno-ep1.jpg?v=moviestills_2026",
+        previewVideo: "assets/previews/me-vacuno-ep1-preview.mp4?v=2026",
+        statusBadge: "3-PART SERIES",
+        isSeries: true,
+        episodes: [
+          {
+            number: "Episode 1",
+            title: "Myths & Misconceptions",
+            description: "Addressing common healthcare misconceptions, cultural hesitations, and vaccine questions with medical clarity.",
+            thumbnail: "assets/thumbnails/me-vacuno-ep1.jpg?v=moviestills_2026",
+            embed: "https://www.youtube.com/embed/OmW7CFWuwng?autoplay=1"
+          },
+          {
+            number: "Episode 2",
+            title: "Reasons Why Vaccinated",
+            description: "Personal community narratives sharing family motivations, frontline care, and reasons for getting vaccinated.",
+            thumbnail: "assets/thumbnails/me-vacuno-ep2.jpg?v=moviestills_2026",
+            embed: "https://www.youtube.com/embed/IhKkL7VAiFo?autoplay=1"
+          },
+          {
+            number: "Episode 3",
+            title: "A Brighter World",
+            description: "Looking toward community resilience, recovery, and hope for a healthier future through shared conversations.",
+            thumbnail: "assets/thumbnails/me-vacuno-ep3.jpg?v=moviestills_2026",
+            embed: "https://www.youtube.com/embed/q2CKjaEJ6Wc?autoplay=1"
+          }
+        ]
+      },
+      {
+        title: "Looking at the United States and Cuba",
+        role: "Director / Editor",
+        year: "2024",
+        category: "NARRATIVE",
+        description: "Historical and visual essay on international perspectives, ideology, and cultural memory.",
+        poster: "assets/thumbnails/united-states-cuba.jpg?v=moviestills_2026",
+        previewVideo: "",
+        fullVideoFile: "assets/videos/united-states-cuba-web.mp4",
+        fullVideoEmbed: ""
+      },
+      {
+        title: "Health Equity Tour: Durham's Hayti Neighborhood",
+        role: "Boom Operator",
+        year: "2023",
+        category: "DOCUMENTARY",
+        description: "Historical documentary tour exploring healthcare equity and community memory in Durham's historic Hayti neighborhood.",
+        poster: "assets/thumbnails/health-equity-tour.jpg?v=moviestills_2026",
+        previewVideo: "assets/previews/health-equity-tour-preview.mp4?v=2026",
+        fullVideoFile: "",
+        fullVideoEmbed: "https://www.youtube.com/embed/cHdVqDP_BgQ?autoplay=1"
+      },
+      {
+        title: "Inside America's UFO Hunting Industry",
+        role: "Production Assistant",
+        year: "2026",
+        category: "DOCUMENTARY",
+        description: "Exploration into investigative subcultures, aerospace sightings, and the modern UFO research community.",
+        poster: "assets/thumbnails/ufo-hunting.jpg?v=moviestills_2026",
+        previewVideo: "assets/previews/ufo-hunting-preview.mp4?v=2026",
+        fullVideoFile: "",
+        fullVideoEmbed: "https://www.youtube.com/embed/dttVQ54uxrc?autoplay=1"
+      },
+      {
+        title: "Cal Basketball: Locker Room & Courtside",
+        role: "Cinematographer / Editor",
+        year: "2025",
+        category: "COMMERCIAL",
+        description: "Dynamic courtside visual storytelling and post-game locker room energy for Cal Men's Basketball.",
+        poster: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
+        previewVideo: "",
+        fullVideoFile: "",
+        fullVideoEmbed: ""
+      }
+    ];
+
+    // 2. SCREENPLAYS LIST
+    const SCREENPLAYS = [
+      {
+        title: "SUGAR (SEASON 3, EPISODE 1)",
+        format: "Television Spec Script • Neo-Noir Drama",
+        genre: "Mystery / Neo-Noir",
+        logline: "An imagined continuation of the neo-noir mystery series following private detective John Sugar through the shadow underworld of Los Angeles.",
+        pdfUrl: "assets/scripts/Sugar-Season-3-Episode-1.pdf"
+      },
+      {
+        title: "HUAYCHAO",
+        format: "Original Screenplay • Drama / Cultural Narrative",
+        genre: "Drama / Cultural Narrative",
+        logline: "A poignant narrative exploring heritage, family, and truth set against the dramatic backdrop of the Peruvian Andes.",
+        pdfUrl: "assets/scripts/Huaychao.pdf"
+      }
+    ];
+
+    // 3. STILLS ARCHIVE
+    const STILLS = [
+      { src: "assets/stills/Home page background.png", title: "Atmospheric Horizon", tag: "Cinematography" },
+      { src: "assets/stills/Cal Basketball Locker Room Celebration (1).png", title: "Cal Basketball Locker Room", tag: "Documentary Action" },
+      { src: "assets/stills/California Guard Celebrates Amidst Hurricanes Showdown (1).png", title: "Hurricanes Showdown", tag: "Courtside" },
+      { src: "assets/stills/still-4.png", title: "Architectural Canopy", tag: "Hayti Tour" },
+      { src: "assets/stills/still-1.png", title: "Sunlit Hallway", tag: "Nuestra América" },
+      { src: "assets/stills/still-6.png", title: "Colorado Night Sky", tag: "UFO Hunting" },
+      { src: "assets/stills/still-7.png", title: "The Red Dress Scene", tag: "Narrative Drama" },
+      { src: "assets/stills/still-8.png", title: "Rural Landscape Portrait", tag: "Documentary Still" },
+      { src: "assets/stills/still-2.png", title: "African Diaspora Dance", tag: "Stage Performance" },
+      { src: "assets/stills/still-3.png", title: "Labor & Environment", tag: "Price of Comfort" },
+      { src: "assets/stills/still-9.png", title: "Close-up in Dark Hat", tag: "Character Study" },
+      { src: "assets/stills/Potential image for website.png", title: "Shadow & Light Study", tag: "Composition" },
+      { src: "assets/stills/Potential image for website 2.png", title: "Location Scout", tag: "Field Still" },
+      { src: "assets/stills/56f67b41-2cde-4bba-9460-99535830e73c.png", title: "Cinematic Perspective", tag: "Narrative Short" },
+      { src: "assets/stills/5260b636-ed88-4ed2-9051-8f76ea95413f.png", title: "Set Lighting Detail", tag: "Cinematography" }
+    ];
+
+    let currentCategory = 'ALL';
+    let currentLayout = 'grid';
+
+    function renderProjects() {
+      const container = document.getElementById('projects-container');
+      const filtered = currentCategory === 'ALL' 
+        ? PROJECTS 
+        : PROJECTS.filter(p => p.category === currentCategory);
+
+      if (currentLayout === 'grid') {
+        container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5";
+        container.innerHTML = filtered.map((p, idx) => `
+          <div class="group relative aspect-[16/10] bg-zinc-950 overflow-hidden cursor-pointer border border-zinc-900/90 hover:border-zinc-700 transition duration-500 shadow-lg"
+               onmouseenter="playPreview(this)"
+               onmouseleave="stopPreview(this)"
+               onclick="openModal(${idx})">
+            
+            <!-- Static Poster Frame -->
+            <img src="${p.poster}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+            
+            <!-- Optional Status Badge for Upcoming Films (e.g., COMING 2027) -->
+            ${p.statusBadge ? `
+              <div class="absolute top-3 left-3 bg-black/85 backdrop-blur-md px-2.5 py-1 border border-zinc-700/80 text-[9px] font-mono tracking-widest uppercase text-white shadow-lg pointer-events-none">
+                ${p.statusBadge}
+              </div>
+            ` : ''}
+
+            <!-- 15-Second Hover Video Preview Loop -->
+            ${p.previewVideo ? `
+              <video src="${p.previewVideo}" muted loop playsinline preload="auto"
+                     class="preview-vid absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none"></video>
+            ` : ''}
+
+            <!-- Cinematic Information Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-5 pointer-events-none">
+              <p class="font-mono text-[10px] uppercase tracking-widest text-zinc-300">${p.role} • ${p.year}</p>
+              <h3 class="text-base font-semibold text-white tracking-wide mt-1 font-brand">${p.title}</h3>
+              <p class="text-xs text-zinc-300 mt-1.5 line-clamp-2 leading-relaxed font-light">${p.description}</p>
+              <span class="font-mono text-[10px] uppercase tracking-widest text-white mt-3 inline-flex items-center gap-1 underline underline-offset-4">
+                ${p.fullVideoEmbed || p.fullVideoFile ? 'Watch Full Film →' : 'View Project Details →'}
+              </span>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        container.className = "divide-y divide-zinc-900 border-t border-zinc-900";
+        container.innerHTML = filtered.map((p, idx) => `
+          <div onclick="openModal(${idx})" class="py-5 px-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:bg-zinc-900/50 cursor-pointer transition">
+            <div>
+              <h3 class="text-base font-medium text-white font-brand">${p.title}</h3>
+              <p class="text-xs text-zinc-400 mt-1 font-light">${p.description}</p>
+            </div>
+            <div class="font-mono text-xs uppercase tracking-widest text-zinc-400 shrink-0">
+              ${p.role} • ${p.year}
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function renderScreenplays() {
+      const container = document.getElementById('screenplays-container');
+      container.innerHTML = SCREENPLAYS.map(s => `
+        <div class="border border-zinc-800/90 bg-zinc-950/60 p-6 flex flex-col justify-between hover:border-zinc-600 transition shadow-lg">
+          <div>
+            <div class="flex justify-between items-center font-mono text-[11px] uppercase tracking-widest text-zinc-400 mb-2">
+              <span>${s.genre}</span>
+              <span>${s.format}</span>
+            </div>
+            <h3 class="text-xl font-medium text-white mb-3 font-brand">${s.title}</h3>
+            <p class="text-sm text-zinc-400 leading-relaxed mb-6 font-light">${s.logline}</p>
+          </div>
+          <a href="${s.pdfUrl}" target="_blank" class="font-mono text-xs uppercase tracking-widest text-white hover:underline inline-flex items-center gap-2">
+            Read Screenplay (PDF) <span>→</span>
+          </a>
+        </div>
+      `).join('');
+    }
+
+    function renderStills() {
+      const container = document.getElementById('stills-masonry-container');
+      container.innerHTML = STILLS.map((s, idx) => `
+        <div class="group relative overflow-hidden bg-zinc-950 border border-zinc-900 hover:border-zinc-700 transition duration-500 shadow-md cursor-pointer"
+             onclick="openStillModal('${s.src}', '${s.title}', '${s.tag}')">
+          <img src="${s.src}" alt="${s.title}" class="w-full h-auto object-cover group-hover:scale-105 transition duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+            <span class="font-mono text-[9px] uppercase tracking-widest text-zinc-300">${s.tag}</span>
+            <h4 class="text-sm font-medium text-white font-brand mt-0.5">${s.title}</h4>
+            <span class="font-mono text-[9px] uppercase tracking-widest text-white underline mt-1">Enlarge Still +</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openStillModal(src, title, tag) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-meta').textContent = `${tag} • Archive Still`;
+      document.getElementById('modal-desc').textContent = "Full-resolution cinematography frame from Mateo La Serna's visual archive.";
+      document.getElementById('modal-player-box').innerHTML = `
+        <img src="${src}" alt="${title}" class="w-full h-full object-contain bg-black" />
+      `;
+      document.getElementById('video-modal').classList.remove('hidden');
+    }
+
+    function playPreview(card) {
+      const vid = card.querySelector('.preview-vid');
+      if (vid) { 
+        vid.muted = true;
+        const playPromise = vid.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {});
+        }
+      }
+    }
+
+    function stopPreview(card) {
+      const vid = card.querySelector('.preview-vid');
+      if (vid) { 
+        vid.pause();
+      }
+    }
+
+    function filterProjects(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.toggle('text-white', btn.dataset.cat === cat);
+        btn.classList.toggle('font-bold', btn.dataset.cat === cat);
+      });
+      renderProjects();
+    }
+
+    function setLayout(layout) {
+      currentLayout = layout;
+      document.getElementById('btn-grid').classList.toggle('underline', layout === 'grid');
+      document.getElementById('btn-grid').classList.toggle('text-white', layout === 'grid');
+      document.getElementById('btn-list').classList.toggle('underline', layout === 'list');
+      document.getElementById('btn-list').classList.toggle('text-white', layout === 'list');
+      renderProjects();
+    }
+
+    let activeSeriesProject = null;
+
+    function switchEpisode(epIdx) {
+      if (!activeSeriesProject || !activeSeriesProject.episodes) return;
+      const ep = activeSeriesProject.episodes[epIdx];
+      const playerBox = document.getElementById('modal-player-box');
+      playerBox.innerHTML = `
+        <iframe class="w-full h-full" src="${ep.embed}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      `;
+      document.getElementById('modal-title').textContent = `${activeSeriesProject.title} — ${ep.number}: ${ep.title}`;
+      document.getElementById('modal-desc').textContent = ep.description;
+      
+      // Update episode buttons
+      document.querySelectorAll('.ep-btn').forEach((btn, i) => {
+        if (i === epIdx) {
+          btn.className = "ep-btn px-3 py-1.5 bg-white text-black text-xs font-mono uppercase tracking-wider transition border border-white cursor-pointer";
+        } else {
+          btn.className = "ep-btn px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs font-mono uppercase tracking-wider transition border border-zinc-800 cursor-pointer";
+        }
+      });
+    }
+
+    function openModal(idx) {
+      const filtered = currentCategory === 'ALL' ? PROJECTS : PROJECTS.filter(p => p.category === currentCategory);
+      const project = filtered[idx];
+      const episodesBar = document.getElementById('modal-episodes-bar');
+      
+      document.getElementById('modal-title').textContent = project.title;
+      document.getElementById('modal-meta').textContent = `${project.role} • ${project.year}`;
+      document.getElementById('modal-desc').textContent = project.description;
+      
+      const playerBox = document.getElementById('modal-player-box');
+      
+      // Check if this project is an episodic series
+      if (project.isSeries && project.episodes && project.episodes.length > 0) {
+        activeSeriesProject = project;
+        episodesBar.classList.remove('hidden');
+        episodesBar.innerHTML = `
+          <div class="w-full flex items-center justify-between mb-2">
+            <span class="font-mono text-[10px] uppercase tracking-widest text-zinc-400">SELECT EPISODE:</span>
+            <span class="font-mono text-[10px] uppercase tracking-widest text-zinc-500">${project.episodes.length} Episodes Total</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            ${project.episodes.map((ep, eIdx) => `
+              <button onclick="switchEpisode(${eIdx})" 
+                      class="ep-btn px-3 py-1.5 ${eIdx === 0 ? 'bg-white text-black border-white' : 'bg-zinc-900 text-zinc-300 border-zinc-800'} text-xs font-mono uppercase tracking-wider transition border cursor-pointer hover:border-zinc-500">
+                ${ep.number}: ${ep.title}
+              </button>
+            `).join('')}
+          </div>
+        `;
+        switchEpisode(0);
+      } else {
+        activeSeriesProject = null;
+        episodesBar.classList.add('hidden');
+        episodesBar.innerHTML = '';
+        
+        // When clicked: play the FULL video (embed or full file)
+        if (project.fullVideoEmbed) {
+          playerBox.innerHTML = `
+            <iframe class="w-full h-full" src="${project.fullVideoEmbed}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+          `;
+        } else if (project.fullVideoFile) {
+          playerBox.innerHTML = `
+            <video src="${project.fullVideoFile}" controls autoplay class="w-full h-full object-contain bg-black"></video>
+          `;
+        } else {
+          const isUpcoming = (project.year && (project.year.toLowerCase().includes('2027') || project.year.toLowerCase().includes('coming')));
+          playerBox.innerHTML = `
+            <div class="relative w-full h-full flex items-center justify-center overflow-hidden bg-black">
+              <img src="${project.poster}" alt="${project.title}" class="absolute inset-0 w-full h-full object-cover opacity-20 filter blur-sm" />
+              <div class="relative z-10 p-8 text-center max-w-lg bg-black/85 backdrop-blur-md border border-zinc-800 shadow-2xl mx-4">
+                <span class="inline-block px-3 py-1 bg-zinc-900 border border-zinc-700 text-zinc-300 font-mono text-[10px] uppercase tracking-widest mb-3">
+                  ${isUpcoming ? 'Feature Documentary • Coming 2027' : 'Private Screening / Inquire For Link'}
+                </span>
+                <h4 class="text-white text-3xl font-brand font-medium mb-3">${project.title}</h4>
+                <p class="text-zinc-300 text-sm leading-relaxed mb-6 font-light">${project.longDescription || project.description}</p>
+                <a href="mailto:Mglaserna12323@gmail.com?subject=Project Inquiry: ${encodeURIComponent(project.title)}" 
+                   class="inline-block border border-white text-white px-7 py-3 font-mono text-xs uppercase tracking-widest hover:bg-white hover:text-black transition">
+                  ${isUpcoming ? 'Request Project Deck & Inquiries →' : 'Request Screener Link →'}
+                </a>
+              </div>
+            </div>
+          `;
+        }
+      }
+      document.getElementById('video-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('modal-player-box').innerHTML = '';
+      document.getElementById('video-modal').classList.add('hidden');
+    }
+
+    function switchView(viewName, scrollToScripts = false) {
+      document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+      const target = document.getElementById(`view-${viewName}`);
+      if (target) target.classList.add('active');
+      
+      const topNav = document.getElementById('top-nav');
+      if (viewName === 'home') {
+        topNav.classList.add('hidden');
+      } else {
+        topNav.classList.remove('hidden');
+      }
+
+      ['portfolio', 'about', 'contact'].forEach(id => {
+        const el = document.getElementById(`nav-${id}`);
+        if (el) {
+          if (viewName === id && !scrollToScripts) {
+            el.classList.add('text-white', 'underline', 'underline-offset-8');
+          } else {
+            el.classList.remove('text-white', 'underline', 'underline-offset-8');
+          }
+        }
+      });
+      const spNav = document.getElementById('nav-screenplays');
+      if (spNav) {
+        if (viewName === 'portfolio' && scrollToScripts) {
+          spNav.classList.add('text-white', 'underline', 'underline-offset-8');
+        } else {
+          spNav.classList.remove('text-white', 'underline', 'underline-offset-8');
+        }
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (scrollToScripts) {
+        setTimeout(() => {
+          const sp = document.getElementById('screenplays-section');
+          if (sp) sp.scrollIntoView({ behavior: 'smooth' });
+        }, 200);
+      }
+    }
+
+    // Modal click listeners
+    document.getElementById('video-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'video-modal') closeModal();
+    });
+    window.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // Initial render
+    renderProjects();
+    renderScreenplays();
+    renderStills();
+
+    // Responsive Hash-based Router
+    function initViewFromHash() {
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'portfolio') {
+        switchView('portfolio');
+      } else if (hash === 'screenplays') {
+        switchView('portfolio', true);
+      } else if (hash === 'about') {
+        switchView('about');
+      } else if (hash === 'contact') {
+        switchView('contact');
+      }
+    }
+    window.addEventListener('hashchange', initViewFromHash);
+    initViewFromHash();
+  </script>
+</body>
+</html>
