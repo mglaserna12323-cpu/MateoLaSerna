@@ -419,6 +419,59 @@
         ]
       },
       {
+        title: "Cal Men's Basketball",
+        role: "Videographer / Editor / Sound Designer",
+        year: "2025",
+        category: "COMMERCIAL",
+        description: "Assisted with all content on the official Cal Men's Basketball Instagram (@calmbball), including editing, videography, sound design, and production across cinematic game day vlogs and recruit hype reels.",
+        poster: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
+        previewVideo: "assets/previews/cal-basketball-preview.mp4?v=2026",
+        statusBadge: "5-PART COLLECTION",
+        seriesTypeLabel: "SELECT GAME VLOG / RECRUIT REEL:",
+        isSeries: true,
+        externalLink: {
+          label: "Visit @calmbball on Instagram",
+          url: "https://www.instagram.com/calmbball/"
+        },
+        episodes: [
+          {
+            number: "Game Vlog 1",
+            title: "Cal vs. Miami",
+            description: "Cinematic game day coverage, courtside energy, and team highlights against Miami. Assisted with editing, videography, sound design, and production.",
+            thumbnail: "assets/thumbnails/cal-miami.jpg?v=2026",
+            file: "assets/videos/cal-basketball/cal-vs-miami-vlog.mp4"
+          },
+          {
+            number: "Game Vlog 2",
+            title: "Cal vs. Northeastern",
+            description: "Full courtside documentary and game highlights capturing team intensity and arena atmosphere. Assisted with editing, videography, sound design, and production.",
+            thumbnail: "assets/thumbnails/cal-northeastern.jpg?v=2026",
+            file: "assets/videos/cal-basketball/cal-vs-northeastern-vlog.mp4"
+          },
+          {
+            number: "Recruit Reel 1",
+            title: "Player Showcase",
+            description: "High-octane social recruit hype reel crafted for the official @calmbball Instagram. Assisted with editing, videography, sound design, and production.",
+            thumbnail: "assets/thumbnails/cal-recruit-1.jpg?v=2026",
+            file: "assets/videos/cal-basketball/recruit-video-1.mp4"
+          },
+          {
+            number: "Recruit Reel 2",
+            title: "Court Energy",
+            description: "Dynamic recruiting visual showcasing locker room focus and hardwood momentum. Assisted with editing, videography, sound design, and production.",
+            thumbnail: "assets/thumbnails/cal-recruit-2.jpg?v=2026",
+            file: "assets/videos/cal-basketball/recruit-video-2.mp4"
+          },
+          {
+            number: "Recruit Reel 3",
+            title: "Team Spotlight",
+            description: "Fast-paced social hype reel highlighting Cal Basketball's athletic culture. Assisted with editing, videography, sound design, and production.",
+            thumbnail: "assets/thumbnails/cal-recruit-3.jpg?v=2026",
+            file: "assets/videos/cal-basketball/recruit-video-3.mp4"
+          }
+        ]
+      },
+      {
         title: "Looking at the United States and Cuba",
         role: "Director / Editor",
         year: "2024",
@@ -450,59 +503,6 @@
         previewVideo: "assets/previews/ufo-hunting-preview.mp4?v=2026",
         fullVideoFile: "",
         fullVideoEmbed: "https://www.youtube.com/embed/dttVQ54uxrc?autoplay=1"
-      },
-      {
-        title: "Cal Men's Basketball",
-        role: "Videographer / Editor / Sound Designer",
-        year: "2025",
-        category: "COMMERCIAL",
-        description: "Assisted with all content on the official Cal Men's Basketball Instagram (@calmbball), including editing, videography, sound design, and production across cinematic game day vlogs and recruit hype reels.",
-        poster: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
-        previewVideo: "assets/previews/cal-basketball-preview.mp4?v=2026",
-        statusBadge: "5-PART COLLECTION",
-        seriesTypeLabel: "SELECT GAME VLOG / RECRUIT REEL:",
-        isSeries: true,
-        externalLink: {
-          label: "Visit @calmbball on Instagram",
-          url: "https://www.instagram.com/calmbball/"
-        },
-        episodes: [
-          {
-            number: "Game Vlog 1",
-            title: "Cal vs. Miami",
-            description: "Cinematic game day coverage, courtside energy, and team highlights against Miami. Assisted with editing, videography, sound design, and production.",
-            thumbnail: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
-            file: "assets/videos/cal-basketball/cal-vs-miami-vlog.mp4"
-          },
-          {
-            number: "Game Vlog 2",
-            title: "Cal vs. Northeastern",
-            description: "Full courtside documentary and game highlights capturing team intensity and arena atmosphere. Assisted with editing, videography, sound design, and production.",
-            thumbnail: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
-            file: "assets/videos/cal-basketball/cal-vs-northeastern-vlog.mp4"
-          },
-          {
-            number: "Recruit Reel 1",
-            title: "Player Showcase",
-            description: "High-octane social recruit hype reel crafted for the official @calmbball Instagram. Assisted with editing, videography, sound design, and production.",
-            thumbnail: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
-            file: "assets/videos/cal-basketball/recruit-video-1.mp4"
-          },
-          {
-            number: "Recruit Reel 2",
-            title: "Court Energy",
-            description: "Dynamic recruiting visual showcasing locker room focus and hardwood momentum. Assisted with editing, videography, sound design, and production.",
-            thumbnail: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
-            file: "assets/videos/cal-basketball/recruit-video-2.mp4"
-          },
-          {
-            number: "Recruit Reel 3",
-            title: "Team Spotlight",
-            description: "Fast-paced social hype reel highlighting Cal Basketball's athletic culture. Assisted with editing, videography, sound design, and production.",
-            thumbnail: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
-            file: "assets/videos/cal-basketball/recruit-video-3.mp4"
-          }
-        ]
       }
     ];
 
@@ -685,6 +685,13 @@
 
     let activeSeriesProject = null;
 
+    function scrollEpisodes(offset) {
+      const container = document.getElementById('episodes-scroll-container');
+      if (container) {
+        container.scrollBy({ left: offset, behavior: 'smooth' });
+      }
+    }
+
     function switchEpisode(epIdx) {
       if (!activeSeriesProject || !activeSeriesProject.episodes) return;
       const ep = activeSeriesProject.episodes[epIdx];
@@ -701,14 +708,23 @@
       document.getElementById('modal-title').textContent = `${activeSeriesProject.title} — ${ep.number}: ${ep.title}`;
       document.getElementById('modal-desc').textContent = ep.description;
       
-      // Update episode buttons
-      document.querySelectorAll('.ep-btn').forEach((btn, i) => {
+      // Update episode cards active styling
+      document.querySelectorAll('.ep-card').forEach((card, i) => {
+        const badge = document.getElementById(`ep-badge-${i}`);
         if (i === epIdx) {
-          btn.className = "ep-btn px-3 py-1.5 bg-white text-black text-xs font-mono uppercase tracking-wider transition border border-white cursor-pointer";
+          card.className = "ep-card group relative flex-shrink-0 w-56 md:w-64 bg-zinc-950 border border-white ring-1 ring-white/60 cursor-pointer transition-all duration-300 overflow-hidden shadow-2xl";
+          if (badge) badge.classList.remove('hidden');
         } else {
-          btn.className = "ep-btn px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs font-mono uppercase tracking-wider transition border border-zinc-800 cursor-pointer";
+          card.className = "ep-card group relative flex-shrink-0 w-56 md:w-64 bg-zinc-950 border border-zinc-800 hover:border-zinc-500 cursor-pointer transition-all duration-300 overflow-hidden shadow-md";
+          if (badge) badge.classList.add('hidden');
         }
       });
+      
+      // Smoothly scroll active card into view
+      const activeCard = document.getElementById(`ep-card-${epIdx}`);
+      if (activeCard) {
+        activeCard.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+      }
     }
 
     function openModal(idx) {
@@ -744,17 +760,47 @@
         episodesBar.classList.remove('hidden');
         const selectorTitle = project.seriesTypeLabel || "SELECT EPISODE:";
         episodesBar.innerHTML = `
-          <div class="w-full flex items-center justify-between mb-2">
-            <span class="font-mono text-[10px] uppercase tracking-widest text-zinc-400">${selectorTitle}</span>
-            <span class="font-mono text-[10px] uppercase tracking-widest text-zinc-500">${project.episodes.length} Items Total</span>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            ${project.episodes.map((ep, eIdx) => `
-              <button onclick="switchEpisode(${eIdx})" 
-                      class="ep-btn px-3 py-1.5 ${eIdx === 0 ? 'bg-white text-black border-white' : 'bg-zinc-900 text-zinc-300 border-zinc-800'} text-xs font-mono uppercase tracking-wider transition border cursor-pointer hover:border-zinc-500">
-                ${ep.number}: ${ep.title}
-              </button>
-            `).join('')}
+          <div class="mt-4 pt-4 border-t border-zinc-800/80">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2.5">
+                <span class="font-mono text-xs uppercase tracking-widest text-white font-medium">${selectorTitle}</span>
+                <span class="font-mono text-[10px] uppercase tracking-widest text-zinc-400 bg-zinc-900 px-2 py-0.5 border border-zinc-800">${project.episodes.length} Items</span>
+              </div>
+              <div class="flex items-center gap-2 text-zinc-400 font-mono text-[10px] uppercase tracking-widest">
+                <span class="hidden sm:inline text-zinc-500">Scroll to explore</span>
+                <button onclick="scrollEpisodes(-260)" class="w-6 h-6 rounded-full border border-zinc-800 hover:border-white hover:text-white flex items-center justify-center transition cursor-pointer text-xs">‹</button>
+                <button onclick="scrollEpisodes(260)" class="w-6 h-6 rounded-full border border-zinc-800 hover:border-white hover:text-white flex items-center justify-center transition cursor-pointer text-xs">›</button>
+              </div>
+            </div>
+            
+            <div id="episodes-scroll-container" class="flex gap-3.5 overflow-x-auto pb-3 pt-1 scroll-smooth">
+              ${project.episodes.map((ep, eIdx) => `
+                <div onclick="switchEpisode(${eIdx})" 
+                     id="ep-card-${eIdx}"
+                     class="ep-card group relative flex-shrink-0 w-56 md:w-64 bg-zinc-950 border ${eIdx === 0 ? 'border-white ring-1 ring-white/60' : 'border-zinc-800 hover:border-zinc-500'} cursor-pointer transition-all duration-300 overflow-hidden shadow-xl">
+                  
+                  <!-- Thumbnail Frame -->
+                  <div class="relative aspect-video w-full overflow-hidden bg-black">
+                    <img src="${ep.thumbnail || project.poster}" alt="${ep.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition duration-300 flex items-center justify-center">
+                      <div class="w-8 h-8 rounded-full bg-black/80 border border-white/60 flex items-center justify-center text-white text-[11px] pl-0.5 shadow-lg group-hover:scale-110 transition">
+                        ▶
+                      </div>
+                    </div>
+                    <div id="ep-badge-${eIdx}" class="${eIdx === 0 ? '' : 'hidden'} absolute top-2 left-2 bg-white text-black font-mono text-[8px] uppercase tracking-widest px-1.5 py-0.5 font-bold shadow-md">
+                      NOW PLAYING
+                    </div>
+                  </div>
+
+                  <!-- Metadata & Title -->
+                  <div class="p-3 bg-zinc-950/95">
+                    <div class="font-mono text-[9px] uppercase tracking-wider text-zinc-400 mb-0.5">${ep.number}</div>
+                    <h4 class="text-white text-xs font-medium font-brand truncate group-hover:text-zinc-200">${ep.title}</h4>
+                    <p class="text-zinc-400 text-[11px] line-clamp-2 leading-relaxed mt-1 font-light">${ep.description}</p>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
           </div>
         `;
         switchEpisode(0);
