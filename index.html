@@ -306,6 +306,7 @@
       </div>
       <div id="modal-player-box" class="aspect-video w-full bg-black border border-zinc-800 overflow-hidden shadow-2xl flex items-center justify-center"></div>
       <div id="modal-episodes-bar" class="hidden mt-4 pt-3 border-t border-zinc-900"></div>
+      <div id="modal-extra-link" class="hidden mt-4"></div>
       <p id="modal-desc" class="text-sm text-zinc-300 mt-4 leading-relaxed font-light"></p>
     </div>
   </div>
@@ -451,15 +452,57 @@
         fullVideoEmbed: "https://www.youtube.com/embed/dttVQ54uxrc?autoplay=1"
       },
       {
-        title: "Cal Basketball: Locker Room & Courtside",
-        role: "Cinematographer / Editor",
+        title: "Cal Men's Basketball",
+        role: "Videographer / Editor / Sound Designer",
         year: "2025",
         category: "COMMERCIAL",
-        description: "Dynamic courtside visual storytelling and post-game locker room energy for Cal Men's Basketball.",
+        description: "Assisted with all content on the official Cal Men's Basketball Instagram (@calmbball), including editing, videography, sound design, and production across cinematic game day vlogs and recruit hype reels.",
         poster: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
-        previewVideo: "",
-        fullVideoFile: "",
-        fullVideoEmbed: ""
+        previewVideo: "assets/previews/cal-basketball-preview.mp4?v=2026",
+        statusBadge: "5-PART COLLECTION",
+        seriesTypeLabel: "SELECT GAME VLOG / RECRUIT REEL:",
+        isSeries: true,
+        externalLink: {
+          label: "Visit @calmbball on Instagram",
+          url: "https://www.instagram.com/calmbball/"
+        },
+        episodes: [
+          {
+            number: "Game Vlog 1",
+            title: "Cal vs. Miami",
+            description: "Cinematic game day coverage, courtside energy, and team highlights against Miami. Assisted with editing, videography, sound design, and production.",
+            thumbnail: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
+            file: "assets/videos/cal-basketball/cal-vs-miami-vlog.mp4"
+          },
+          {
+            number: "Game Vlog 2",
+            title: "Cal vs. Northeastern",
+            description: "Full courtside documentary and game highlights capturing team intensity and arena atmosphere. Assisted with editing, videography, sound design, and production.",
+            thumbnail: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
+            file: "assets/videos/cal-basketball/cal-vs-northeastern-vlog.mp4"
+          },
+          {
+            number: "Recruit Reel 1",
+            title: "Player Showcase",
+            description: "High-octane social recruit hype reel crafted for the official @calmbball Instagram. Assisted with editing, videography, sound design, and production.",
+            thumbnail: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
+            file: "assets/videos/cal-basketball/recruit-video-1.mp4"
+          },
+          {
+            number: "Recruit Reel 2",
+            title: "Court Energy",
+            description: "Dynamic recruiting visual showcasing locker room focus and hardwood momentum. Assisted with editing, videography, sound design, and production.",
+            thumbnail: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
+            file: "assets/videos/cal-basketball/recruit-video-2.mp4"
+          },
+          {
+            number: "Recruit Reel 3",
+            title: "Team Spotlight",
+            description: "Fast-paced social hype reel highlighting Cal Basketball's athletic culture. Assisted with editing, videography, sound design, and production.",
+            thumbnail: "assets/thumbnails/cal-basketball.png?v=moviestills_2026",
+            file: "assets/videos/cal-basketball/recruit-video-3.mp4"
+          }
+        ]
       }
     ];
 
@@ -539,7 +582,7 @@
               <h3 class="text-base font-semibold text-white tracking-wide mt-1 font-brand">${p.title}</h3>
               <p class="text-xs text-zinc-300 mt-1.5 line-clamp-2 leading-relaxed font-light">${p.description}</p>
               <span class="font-mono text-[10px] uppercase tracking-widest text-white mt-3 inline-flex items-center gap-1 underline underline-offset-4">
-                ${p.fullVideoEmbed || p.fullVideoFile ? 'Watch Full Film →' : 'View Project Details →'}
+                ${p.isSeries ? 'View Collection / Episodes →' : (p.fullVideoEmbed || p.fullVideoFile ? 'Watch Full Film →' : 'View Project Details →')}
               </span>
             </div>
           </div>
@@ -646,9 +689,15 @@
       if (!activeSeriesProject || !activeSeriesProject.episodes) return;
       const ep = activeSeriesProject.episodes[epIdx];
       const playerBox = document.getElementById('modal-player-box');
-      playerBox.innerHTML = `
-        <iframe class="w-full h-full" src="${ep.embed}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-      `;
+      if (ep.embed) {
+        playerBox.innerHTML = `
+          <iframe class="w-full h-full" src="${ep.embed}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        `;
+      } else if (ep.file) {
+        playerBox.innerHTML = `
+          <video src="${ep.file}" controls autoplay class="w-full h-full object-contain bg-black"></video>
+        `;
+      }
       document.getElementById('modal-title').textContent = `${activeSeriesProject.title} — ${ep.number}: ${ep.title}`;
       document.getElementById('modal-desc').textContent = ep.description;
       
@@ -666,21 +715,38 @@
       const filtered = currentCategory === 'ALL' ? PROJECTS : PROJECTS.filter(p => p.category === currentCategory);
       const project = filtered[idx];
       const episodesBar = document.getElementById('modal-episodes-bar');
+      const extraLink = document.getElementById('modal-extra-link');
       
       document.getElementById('modal-title').textContent = project.title;
       document.getElementById('modal-meta').textContent = `${project.role} • ${project.year}`;
       document.getElementById('modal-desc').textContent = project.description;
+
+      // Handle External Link (e.g. Cal Basketball Instagram)
+      if (project.externalLink) {
+        extraLink.classList.remove('hidden');
+        extraLink.innerHTML = `
+          <a href="${project.externalLink.url}" target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center gap-2 px-3.5 py-1.5 border border-zinc-700 hover:border-white bg-zinc-900 text-zinc-300 hover:text-white font-mono text-xs uppercase tracking-wider transition">
+            <span>${project.externalLink.label}</span>
+            <span>↗</span>
+          </a>
+        `;
+      } else {
+        extraLink.classList.add('hidden');
+        extraLink.innerHTML = '';
+      }
       
       const playerBox = document.getElementById('modal-player-box');
       
-      // Check if this project is an episodic series
+      // Check if this project is an episodic series or collection
       if (project.isSeries && project.episodes && project.episodes.length > 0) {
         activeSeriesProject = project;
         episodesBar.classList.remove('hidden');
+        const selectorTitle = project.seriesTypeLabel || "SELECT EPISODE:";
         episodesBar.innerHTML = `
           <div class="w-full flex items-center justify-between mb-2">
-            <span class="font-mono text-[10px] uppercase tracking-widest text-zinc-400">SELECT EPISODE:</span>
-            <span class="font-mono text-[10px] uppercase tracking-widest text-zinc-500">${project.episodes.length} Episodes Total</span>
+            <span class="font-mono text-[10px] uppercase tracking-widest text-zinc-400">${selectorTitle}</span>
+            <span class="font-mono text-[10px] uppercase tracking-widest text-zinc-500">${project.episodes.length} Items Total</span>
           </div>
           <div class="flex flex-wrap gap-2">
             ${project.episodes.map((ep, eIdx) => `
@@ -731,6 +797,11 @@
 
     function closeModal() {
       document.getElementById('modal-player-box').innerHTML = '';
+      const extraLink = document.getElementById('modal-extra-link');
+      if (extraLink) {
+        extraLink.classList.add('hidden');
+        extraLink.innerHTML = '';
+      }
       document.getElementById('video-modal').classList.add('hidden');
     }
 
