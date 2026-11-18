@@ -293,18 +293,22 @@
   <!-- ==========================================
        FULL VIDEO & STILL LIGHTBOX MODAL
        ========================================== -->
-  <div id="video-modal" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-10">
-    <div class="relative w-full max-w-5xl" onclick="event.stopPropagation()">
-      <div class="flex justify-between items-center mb-4">
+  <div id="video-modal" onclick="closeModal()" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-md overflow-y-auto p-4 md:p-8 flex justify-center items-start">
+    <!-- Floating Always-Visible Close Button -->
+    <button onclick="closeModal()" 
+            class="fixed top-4 right-4 md:top-6 md:right-6 z-[60] bg-zinc-900/90 hover:bg-white text-zinc-300 hover:text-black border border-zinc-700 hover:border-white px-4 py-2 font-mono text-xs uppercase tracking-widest backdrop-blur-md transition shadow-2xl cursor-pointer flex items-center gap-2">
+      <span class="text-sm font-bold leading-none">✕</span>
+      <span>CLOSE [ESC]</span>
+    </button>
+
+    <div class="relative w-full max-w-5xl my-auto py-4" onclick="event.stopPropagation()">
+      <div class="flex justify-between items-center mb-3 pr-32">
         <div>
           <h3 id="modal-title" class="text-lg font-medium text-white font-brand"></h3>
           <p id="modal-meta" class="text-xs font-mono uppercase tracking-widest text-zinc-400"></p>
         </div>
-        <button onclick="closeModal()" class="font-mono text-xs uppercase tracking-widest text-zinc-400 hover:text-white border border-zinc-800 px-4 py-2 hover:border-zinc-500 transition cursor-pointer">
-          Close [ESC]
-        </button>
       </div>
-      <div id="modal-player-box" class="aspect-video w-full bg-black border border-zinc-800 overflow-hidden shadow-2xl flex items-center justify-center"></div>
+      <div id="modal-player-box" class="aspect-video max-h-[56vh] w-full bg-black border border-zinc-800 overflow-hidden shadow-2xl flex items-center justify-center mx-auto"></div>
       <div id="modal-episodes-bar" class="hidden mt-4 pt-3 border-t border-zinc-900"></div>
       <div id="modal-extra-link" class="hidden mt-4"></div>
       <p id="modal-desc" class="text-sm text-zinc-300 mt-4 leading-relaxed font-light"></p>
@@ -526,21 +530,17 @@
 
     // 3. STILLS ARCHIVE
     const STILLS = [
-      { src: "assets/stills/Home page background.png", title: "Atmospheric Horizon", tag: "Cinematography" },
-      { src: "assets/stills/Cal Basketball Locker Room Celebration (1).png", title: "Cal Basketball Locker Room", tag: "Documentary Action" },
-      { src: "assets/stills/California Guard Celebrates Amidst Hurricanes Showdown (1).png", title: "Hurricanes Showdown", tag: "Courtside" },
-      { src: "assets/stills/still-4.png", title: "Architectural Canopy", tag: "Hayti Tour" },
-      { src: "assets/stills/still-1.png", title: "Sunlit Hallway", tag: "Nuestra América" },
-      { src: "assets/stills/still-6.png", title: "Colorado Night Sky", tag: "UFO Hunting" },
-      { src: "assets/stills/still-7.png", title: "The Red Dress Scene", tag: "Narrative Drama" },
-      { src: "assets/stills/still-8.png", title: "Rural Landscape Portrait", tag: "Documentary Still" },
-      { src: "assets/stills/still-2.png", title: "African Diaspora Dance", tag: "Stage Performance" },
-      { src: "assets/stills/still-3.png", title: "Labor & Environment", tag: "Price of Comfort" },
-      { src: "assets/stills/still-9.png", title: "Close-up in Dark Hat", tag: "Character Study" },
-      { src: "assets/stills/Potential image for website.png", title: "Shadow & Light Study", tag: "Composition" },
-      { src: "assets/stills/Potential image for website 2.png", title: "Location Scout", tag: "Field Still" },
-      { src: "assets/stills/56f67b41-2cde-4bba-9460-99535830e73c.png", title: "Cinematic Perspective", tag: "Narrative Short" },
-      { src: "assets/stills/5260b636-ed88-4ed2-9051-8f76ea95413f.png", title: "Set Lighting Detail", tag: "Cinematography" }
+      { src: "assets/stills/Price of Comfort Still 1.png", title: "Price of Comfort Still", tag: "Price of Comfort" },
+      { src: "assets/stills/Running out of Time still 1.png", title: "Running out of Time Still", tag: "Running Out of Time" },
+      { src: "assets/stills/Cal Basketball Locker Room Celebration Still (1).png", title: "Cal Basketball Locker Room Celebration Still", tag: "Cal Basketball" },
+      { src: "assets/stills/Price of Comfort Still 2.png", title: "Price of Comfort Still", tag: "Price of Comfort" },
+      { src: "assets/stills/Nuestra America Still 1.png", title: "Nuestra America Still", tag: "Nuestra América" },
+      { src: "assets/stills/DJ Campbell Celibration Still .png", title: "DJ Campbell Celebration Still", tag: "Cal Basketball" },
+      { src: "assets/stills/Price of Comfort Still 3.png", title: "Price of Comfort Still", tag: "Price of Comfort" },
+      { src: "assets/stills/Running out of Time still 2.png", title: "Running out of Time Still", tag: "Running Out of Time" },
+      { src: "assets/stills/Price of Comfort Still 4.png", title: "Price of Comfort Still", tag: "Price of Comfort" },
+      { src: "assets/stills/Price of Comfort Still 5.png", title: "Price of Comfort Still", tag: "Price of Comfort" },
+      { src: "assets/stills/Potential image for website 2.png", title: "Potential image for website", tag: "Cinematography" }
     ];
 
     let currentCategory = 'ALL';
@@ -644,6 +644,10 @@
       document.getElementById('modal-player-box').innerHTML = `
         <img src="${src}" alt="${title}" class="w-full h-full object-contain bg-black" />
       `;
+      const epBar = document.getElementById('modal-episodes-bar');
+      if (epBar) { epBar.classList.add('hidden'); epBar.innerHTML = ''; }
+      const exLink = document.getElementById('modal-extra-link');
+      if (exLink) { exLink.classList.add('hidden'); exLink.innerHTML = ''; }
       document.getElementById('video-modal').classList.remove('hidden');
     }
 
@@ -848,8 +852,21 @@
         extraLink.classList.add('hidden');
         extraLink.innerHTML = '';
       }
+      const episodesBar = document.getElementById('modal-episodes-bar');
+      if (episodesBar) {
+        episodesBar.classList.add('hidden');
+        episodesBar.innerHTML = '';
+      }
+      activeSeriesProject = null;
       document.getElementById('video-modal').classList.add('hidden');
     }
+
+    // Global keyboard listener for Escape key to close modal
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        closeModal();
+      }
+    });
 
     function switchView(viewName, scrollToScripts = false) {
       document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
