@@ -396,22 +396,22 @@
         isSeries: true,
         episodes: [
           {
-            number: "Episode 1",
-            title: "Myths & Misconceptions",
+            number: "Part 1",
+            title: "Episode 1: Myths & Misconceptions",
             description: "Addressing common healthcare misconceptions, cultural hesitations, and vaccine questions with medical clarity.",
             thumbnail: "assets/thumbnails/me-vacuno-ep1.jpg?v=moviestills_2026",
             embed: "https://www.youtube.com/embed/OmW7CFWuwng?autoplay=1"
           },
           {
-            number: "Episode 2",
-            title: "Reasons Why Vaccinated",
+            number: "Part 2",
+            title: "Episode 2: Reasons Why Vaccinated",
             description: "Personal community narratives sharing family motivations, frontline care, and reasons for getting vaccinated.",
             thumbnail: "assets/thumbnails/me-vacuno-ep2.jpg?v=moviestills_2026",
             embed: "https://www.youtube.com/embed/IhKkL7VAiFo?autoplay=1"
           },
           {
-            number: "Episode 3",
-            title: "A Brighter World",
+            number: "Part 3",
+            title: "Episode 3: A Brighter World",
             description: "Looking toward community resilience, recovery, and hope for a healthier future through shared conversations.",
             thumbnail: "assets/thumbnails/me-vacuno-ep3.jpg?v=moviestills_2026",
             embed: "https://www.youtube.com/embed/q2CKjaEJ6Wc?autoplay=1"
@@ -435,38 +435,38 @@
         },
         episodes: [
           {
-            number: "Game Vlog 1",
-            title: "Cal vs. Miami",
+            number: "Video 1",
+            title: "Cal vs. Miami Vlog",
             description: "Cinematic game day coverage, courtside energy, and team highlights against Miami. Assisted with editing, videography, sound design, and production.",
-            thumbnail: "assets/thumbnails/cal-miami.jpg?v=2026",
+            thumbnail: "assets/thumbnails/cal-vs-miami-vlog.jpg?v=cal_official_2026",
             file: "assets/videos/cal-basketball/cal-vs-miami-vlog.mp4"
           },
           {
-            number: "Game Vlog 2",
-            title: "Cal vs. Northeastern",
+            number: "Video 2",
+            title: "Cal vs. Northeastern Vlog",
             description: "Full courtside documentary and game highlights capturing team intensity and arena atmosphere. Assisted with editing, videography, sound design, and production.",
-            thumbnail: "assets/thumbnails/cal-northeastern.jpg?v=2026",
+            thumbnail: "assets/thumbnails/cal-vs-northeastern-vlog.jpg?v=cal_official_2026",
             file: "assets/videos/cal-basketball/cal-vs-northeastern-vlog.mp4"
           },
           {
-            number: "Recruit Reel 1",
-            title: "Player Showcase",
-            description: "High-octane social recruit hype reel crafted for the official @calmbball Instagram. Assisted with editing, videography, sound design, and production.",
-            thumbnail: "assets/thumbnails/cal-recruit-1.jpg?v=2026",
+            number: "Video 3",
+            title: "Recruit Video 1",
+            description: "Social recruit hype reel crafted for the official @calmbball Instagram. Assisted with editing, videography, sound design, and production.",
+            thumbnail: "assets/thumbnails/cal-recruit-video-1.jpg?v=cal_official_2026",
             file: "assets/videos/cal-basketball/recruit-video-1.mp4"
           },
           {
-            number: "Recruit Reel 2",
-            title: "Court Energy",
-            description: "Dynamic recruiting visual showcasing locker room focus and hardwood momentum. Assisted with editing, videography, sound design, and production.",
-            thumbnail: "assets/thumbnails/cal-recruit-2.jpg?v=2026",
+            number: "Video 4",
+            title: "Recruit Video 2",
+            description: "Social recruit hype reel crafted for the official @calmbball Instagram. Assisted with editing, videography, sound design, and production.",
+            thumbnail: "assets/thumbnails/cal-recruit-video-2.jpg?v=cal_official_2026",
             file: "assets/videos/cal-basketball/recruit-video-2.mp4"
           },
           {
-            number: "Recruit Reel 3",
-            title: "Team Spotlight",
-            description: "Fast-paced social hype reel highlighting Cal Basketball's athletic culture. Assisted with editing, videography, sound design, and production.",
-            thumbnail: "assets/thumbnails/cal-recruit-3.jpg?v=2026",
+            number: "Video 5",
+            title: "Recruit Video 3",
+            description: "Social recruit hype reel crafted for the official @calmbball Instagram. Assisted with editing, videography, sound design, and production.",
+            thumbnail: "assets/thumbnails/cal-recruit-video-3.jpg?v=cal_official_2026",
             file: "assets/videos/cal-basketball/recruit-video-3.mp4"
           }
         ]
@@ -705,7 +705,7 @@
           <video src="${ep.file}" controls autoplay class="w-full h-full object-contain bg-black"></video>
         `;
       }
-      document.getElementById('modal-title').textContent = `${activeSeriesProject.title} — ${ep.number}: ${ep.title}`;
+      document.getElementById('modal-title').textContent = `${activeSeriesProject.title} — ${ep.title}`;
       document.getElementById('modal-desc').textContent = ep.description;
       
       // Update episode cards active styling
