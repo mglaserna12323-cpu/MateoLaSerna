@@ -244,15 +244,15 @@
     <div id="about-stills-section" class="pt-12 border-t border-zinc-900">
       <div class="flex flex-wrap justify-between items-end gap-4 mb-8">
         <div>
-          <p class="font-mono text-xs uppercase tracking-widest text-zinc-500 mb-1">STILLS &amp; CINEMATOGRAPHY ARCHIVE ]</p>
-          <h3 class="text-2xl md:text-4xl font-light tracking-tight text-white font-brand">Selected Frames</h3>
+          <p class="font-mono text-xs uppercase tracking-widest text-zinc-500 mb-1">ARCHIVE ]</p>
+          <h3 class="text-2xl md:text-4xl font-light tracking-tight text-white font-brand">Selected Frames and Photography</h3>
         </div>
         <p class="font-mono text-xs uppercase tracking-widest text-zinc-500">
           Scroll to explore • Click any still to inspect
         </p>
       </div>
 
-      <div id="stills-masonry-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div id="stills-masonry-container" class="columns-1 sm:columns-2 lg:columns-3 gap-4">
         <!-- Rendered dynamically from STILLS list below -->
       </div>
     </div>
@@ -294,21 +294,27 @@
        FULL VIDEO & STILL LIGHTBOX MODAL
        ========================================== -->
   <div id="video-modal" onclick="closeModal()" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-md overflow-y-auto p-4 md:p-8 flex justify-center items-start">
-    <!-- Floating Always-Visible Close Button -->
+    <!-- Floating Always-Visible Close Button Pinned to Viewport Corner -->
     <button onclick="closeModal()" 
-            class="fixed top-4 right-4 md:top-6 md:right-6 z-[60] bg-zinc-900/90 hover:bg-white text-zinc-300 hover:text-black border border-zinc-700 hover:border-white px-4 py-2 font-mono text-xs uppercase tracking-widest backdrop-blur-md transition shadow-2xl cursor-pointer flex items-center gap-2">
+            class="fixed top-4 right-4 md:top-6 md:right-6 z-[70] bg-zinc-900/90 hover:bg-white text-zinc-300 hover:text-black border border-zinc-700 hover:border-white px-4 py-2 font-mono text-xs uppercase tracking-widest backdrop-blur-md transition shadow-2xl cursor-pointer flex items-center gap-2">
       <span class="text-sm font-bold leading-none">✕</span>
       <span>CLOSE [ESC]</span>
     </button>
 
-    <div class="relative w-full max-w-5xl my-auto py-4" onclick="event.stopPropagation()">
-      <div class="flex justify-between items-center mb-3 pr-32">
+    <div class="relative w-full max-w-5xl mx-auto my-6 md:my-10" onclick="event.stopPropagation()">
+      <div class="flex justify-between items-center mb-3">
         <div>
           <h3 id="modal-title" class="text-lg font-medium text-white font-brand"></h3>
           <p id="modal-meta" class="text-xs font-mono uppercase tracking-widest text-zinc-400"></p>
         </div>
+        <!-- In-Flow Header Close Button for Immediate Direct Accessibility -->
+        <button onclick="closeModal()" 
+                class="bg-zinc-900/90 hover:bg-white text-zinc-300 hover:text-black border border-zinc-700 hover:border-white px-3 py-1.5 font-mono text-xs uppercase tracking-widest transition cursor-pointer flex items-center gap-1.5 shrink-0">
+          <span class="text-sm font-bold leading-none">✕</span>
+          <span>CLOSE [ESC]</span>
+        </button>
       </div>
-      <div id="modal-player-box" class="aspect-video max-h-[56vh] w-full bg-black border border-zinc-800 overflow-hidden shadow-2xl flex items-center justify-center mx-auto"></div>
+      <div id="modal-player-box" class="aspect-video max-h-[54vh] w-full bg-black border border-zinc-800 overflow-hidden shadow-2xl flex items-center justify-center mx-auto"></div>
       <div id="modal-episodes-bar" class="hidden mt-4 pt-3 border-t border-zinc-900"></div>
       <div id="modal-extra-link" class="hidden mt-4"></div>
       <p id="modal-desc" class="text-sm text-zinc-300 mt-4 leading-relaxed font-light"></p>
@@ -537,6 +543,7 @@
       { src: "assets/stills/Price of Comfort Still 2.png", title: "Price of Comfort Still", tag: "Price of Comfort" },
       { src: "assets/stills/Mateo La Serna Partner Portrait-7.jpg", title: "Mateo La Serna Partner Portrait", tag: "Portrait" },
       { src: "assets/stills/Nuestra America Still 1.png", title: "Nuestra America Still", tag: "Nuestra América" },
+      { src: "assets/stills/California Guard Celebrates Amidst Hurricanes Showdown (1).png", title: "California Guard Celebrates Amidst Hurricanes Showdown", tag: "Cal Basketball" },
       { src: "assets/stills/DJ Campbell Celibration Still .png", title: "DJ Campbell Celebration Still", tag: "Cal Basketball" },
       { src: "assets/stills/Mateo La Serna Partner Portrait-8.jpg", title: "Mateo La Serna Partner Portrait", tag: "Portrait" },
       { src: "assets/stills/Price of Comfort Still 3.png", title: "Price of Comfort Still", tag: "Price of Comfort" },
@@ -545,6 +552,7 @@
       { src: "assets/stills/Price of Comfort Still 4.png", title: "Price of Comfort Still", tag: "Price of Comfort" },
       { src: "assets/stills/Mateo La Serna Partner Portrait.jpg", title: "Mateo La Serna Partner Portrait", tag: "Portrait" },
       { src: "assets/stills/Price of Comfort Still 5.png", title: "Price of Comfort Still", tag: "Price of Comfort" },
+      { src: "assets/stills/Potential image for website.png", title: "Potential image for website", tag: "Cinematography" },
       { src: "assets/stills/Potential image for website 2.png", title: "Potential image for website", tag: "Cinematography" },
       { src: "assets/stills/Screenshot 2026-11-06 at 4.21.10 PM.png", title: "Production Still", tag: "Archive" },
       { src: "assets/stills/Screenshot 2026-11-06 at 4.24.04 PM.png", title: "Production Still", tag: "Archive" }
@@ -632,10 +640,10 @@
     function renderStills() {
       const container = document.getElementById('stills-masonry-container');
       container.innerHTML = STILLS.map((s, idx) => `
-        <div class="group relative overflow-hidden bg-zinc-950 border border-zinc-900 hover:border-zinc-700 transition duration-500 shadow-md cursor-pointer"
+        <div class="break-inside-avoid mb-4 group relative overflow-hidden bg-zinc-950 border border-zinc-900 hover:border-zinc-700 transition duration-500 shadow-md cursor-pointer"
              onclick="openStillModal('${s.src}', '${s.title}', '${s.tag}')">
-          <img src="${s.src}" alt="${s.title}" class="w-full h-auto object-cover group-hover:scale-105 transition duration-700" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
+          <img src="${s.src}" alt="${s.title}" class="w-full h-auto object-cover group-hover:scale-105 transition duration-700 block" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 pointer-events-none">
             <span class="font-mono text-[9px] uppercase tracking-widest text-zinc-300">${s.tag}</span>
             <h4 class="text-sm font-medium text-white font-brand mt-0.5">${s.title}</h4>
             <span class="font-mono text-[9px] uppercase tracking-widest text-white underline mt-1">Enlarge Still +</span>
@@ -648,14 +656,18 @@
       document.getElementById('modal-title').textContent = title;
       document.getElementById('modal-meta').textContent = `${tag} • Archive Still`;
       document.getElementById('modal-desc').textContent = "Full-resolution cinematography frame from Mateo La Serna's visual archive.";
-      document.getElementById('modal-player-box').innerHTML = `
-        <img src="${src}" alt="${title}" class="w-full h-full object-contain bg-black" />
+      const playerBox = document.getElementById('modal-player-box');
+      playerBox.className = "w-full max-h-[75vh] bg-black border border-zinc-800 overflow-hidden shadow-2xl flex items-center justify-center mx-auto";
+      playerBox.innerHTML = `
+        <img src="${src}" alt="${title}" class="max-h-[75vh] w-auto max-w-full object-contain mx-auto bg-black" />
       `;
       const epBar = document.getElementById('modal-episodes-bar');
       if (epBar) { epBar.classList.add('hidden'); epBar.innerHTML = ''; }
       const exLink = document.getElementById('modal-extra-link');
       if (exLink) { exLink.classList.add('hidden'); exLink.innerHTML = ''; }
-      document.getElementById('video-modal').classList.remove('hidden');
+      const modal = document.getElementById('video-modal');
+      modal.classList.remove('hidden');
+      modal.scrollTop = 0;
     }
 
     function playPreview(card) {
@@ -707,6 +719,7 @@
       if (!activeSeriesProject || !activeSeriesProject.episodes) return;
       const ep = activeSeriesProject.episodes[epIdx];
       const playerBox = document.getElementById('modal-player-box');
+      playerBox.className = "aspect-video max-h-[54vh] w-full bg-black border border-zinc-800 overflow-hidden shadow-2xl flex items-center justify-center mx-auto";
       if (ep.embed) {
         playerBox.innerHTML = `
           <iframe class="w-full h-full" src="${ep.embed}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
@@ -764,6 +777,7 @@
       }
       
       const playerBox = document.getElementById('modal-player-box');
+      playerBox.className = "aspect-video max-h-[54vh] w-full bg-black border border-zinc-800 overflow-hidden shadow-2xl flex items-center justify-center mx-auto";
       
       // Check if this project is an episodic series or collection
       if (project.isSeries && project.episodes && project.episodes.length > 0) {
@@ -849,7 +863,9 @@
           `;
         }
       }
-      document.getElementById('video-modal').classList.remove('hidden');
+      const modal = document.getElementById('video-modal');
+      modal.classList.remove('hidden');
+      modal.scrollTop = 0;
     }
 
     function closeModal() {
